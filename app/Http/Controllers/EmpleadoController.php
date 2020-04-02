@@ -14,11 +14,10 @@ class EmpleadoController extends Controller
         {
             $empleados = Empleado::select('users.name as usuario','users.tipo','empleados.*')
                             ->join('users','users.id','=','empleados.user_id')
-                            ->whereIn('users.tipo',['ADMINISTRADOR','NUTRICIONISTA'])
                             ->where('users.estado',1)
                             ->orderBy('empleados.nombre','asc')
                             ->get();
-            return view('usuarios.index',compact('empleados'));
+            return view('empleados.index',compact('empleados'));
         }
         abort(401, 'Acceso no autorizado');
     }
@@ -27,7 +26,7 @@ class EmpleadoController extends Controller
     {
         if($request->user()->tipo == 'ADMINISTRADOR')
         {
-            return view('usuarios.create');
+            return view('empleados.create');
         }
         abort(401, 'Acceso no autorizado');
     }
@@ -54,67 +53,22 @@ class EmpleadoController extends Controller
         $nuevo_usuario->save();
 
         // CREANDO LOS DATOS DEL USUARIO
-        $datosUsuario = new Empleado(array_map('mb_strtoupper',$request->except('foto','correo')));
-        $datosUsuario->correo = $request->correo;
+        $datos_empleado = new Empleado(array_map('mb_strtoupper',$request->except('foto','correo')));
+        $datos_empleado->correo = $request->correo;
         $nom_foto = 'user_default.png';
         if($request->hasFile('foto'))
         {
             //obtener el archivo
             $file_foto = $request->file('foto');
             $extension = ".".$file_foto->getClientOriginalExtension();
-            $nom_foto = $nombre_usuario.str_replace(' ','_',$datosUsuario->nombre).time().$extension;
+            $nom_foto = $nombre_usuario.str_replace(' ','_',$datos_empleado->nombre).time().$extension;
             $file_foto->move(public_path()."/imgs/empleado/",$nom_foto);
             //completar los campos foto y fecha registro del empleadol
         }
-        $datosUsuario->foto = $nom_foto;
-        $nuevo_usuario->empleado()->save($datosUsuario);
+        $datos_empleado->foto = $nom_foto;
+        $nuevo_usuario->empleado()->save($datos_empleado);
 
-        return redirect()->route('users.index')->with('bien','Usuario registrado con éxito');
-    }
-
-    public function edit(Empleado $empleado, Request $request)
-    {
-        if($request->user()->tipo == 'ADMINISTRADOR')
-        {
-            return view('usuarios.edit',compact('empleado'));
-        }
-        abort(401, 'Acceso no autorizado');
-    }
-
-    public function update(Request $request, Empleado $empleado)
-    {
-        $empleado->update(array_map('mb_strtoupper',$request->except('foto','correo')));
-        $empleado->correo = $request->correo;
-        $empleado->save();
-        if($request->hasFile('foto'))
-        {
-            // ELIMINAR FOTO ANTIGUA
-            $foto_antigua = $empleado->foto;
-            if($foto_antigua != 'user_default.png')
-            {
-                \File::delete(public_path()."/imgs/empleado/".$foto_antigua);
-            }
-            // SUBIR NUEVA FOTO
-            $file_foto = $request->file('foto');
-            $extension = ".".$file_foto->getClientOriginalExtension();
-            $nom_foto = $empleado->user->name.str_replace(' ','_',$empleado->nom).time().$extension;
-            $file_foto->move(public_path()."/imgs/empleado/",$nom_foto);
-            $empleado->foto = $nom_foto;
-            $empleado->save();
-        }
-        return redirect()->route('users.index')->with('bien','Registro modificado con éxito');
-    }
-
-    public function show(Empleado $empleado)
-    {
-
-    }
-
-    public function destroy(Empleado $empleado,Request $request)
-    {
-        $empleado->user->estado = 0;
-        $empleado->user->save();
-        return redirect()->route('users.index')->with('bien','Registro elimnado');
+        return redirect()->route('users.index')->with('bien','Empleado registrado con éxito');
     }
 
     public function nombreUsuario($nom, $apep)
