@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2020 a las 17:04:34
+-- Tiempo de generación: 31-03-2020 a las 20:25:25
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.8
 
@@ -69,13 +69,22 @@ CREATE TABLE `empleados` (
   `ci_exp` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dir` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cel` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fono` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fono` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `foto` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `correo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rol` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `dir`, `cel`, `fono`, `foto`, `correo`, `rol`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'JORGE', 'CASTRO', '', '12345678', 'LP', '', '78945612', '', 'user_default.png', 'jorge@hotmail.com', 'ROL', 2, '2020-03-31 17:23:24', '2020-03-31 18:07:46'),
+(2, 'JAIME', 'ALCANTARA', '', '87654321', 'CB', '', '68412345', '', 'user_default.png', 'jaime@hotmail.com', 'ROL', 3, '2020-03-31 17:56:35', '2020-03-31 17:56:35');
 
 -- --------------------------------------------------------
 
@@ -211,7 +220,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `tipo`, `foto`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$10$HxYLlpLIuoD/4mBvgXAvg.wwXTQOBNtMtVAw3QDqrD1RSKA52QxR2', 'ADMINISTRADOR', 'user_default.png', 1, '2020-03-31 14:19:11', '2020-03-31 14:19:11');
+(1, 'admin', '$2y$10$HxYLlpLIuoD/4mBvgXAvg.wwXTQOBNtMtVAw3QDqrD1RSKA52QxR2', 'ADMINISTRADOR', 'user_default.png', 1, '2020-03-31 14:19:11', '2020-03-31 14:19:11'),
+(2, 'JCASTRO', '$2y$10$4LvVnlmcvHKbSHSn2fniKOms/Vu4nJ51zwntMeKyls4adbdSnMhM2', 'EMPLEADO', 'user_default.png', 1, '2020-03-31 17:23:24', '2020-03-31 17:23:24'),
+(3, 'JALCANTARA', '$2y$10$Acp2nQvxuo2x5EkUFD6A5equOsSDYs3ARyEG.AjWkBgqW1hwZ2rW.', 'ADMINISTRADOR', 'user_default.png', 1, '2020-03-31 17:56:35', '2020-03-31 17:56:35');
 
 -- --------------------------------------------------------
 
@@ -321,7 +332,7 @@ ALTER TABLE `detalle_ventas`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -351,7 +362,7 @@ ALTER TABLE `promociones`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
