@@ -9,7 +9,7 @@ class Empleado extends Model
     protected $fillable = [
         'nombre','paterno','materno','ci',
         'ci_exp','dir','cel','fono',
-        'foto','correo','user_id'
+        'foto','correo','rol','user_id'
     ];
 
     public function user()

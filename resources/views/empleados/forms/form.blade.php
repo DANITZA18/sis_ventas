@@ -2,46 +2,46 @@
     <div class="col-md-4">
         <div class="form-group">
             <label>Nombre(s)*:</label>
-            <input type="text" name="nombre" class="form-control" value="" required autofocus>
+            {{Form::text('nombre',null,['class'=>'form-control','required'])}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Paterno*:</label>
-            <input type="text" name="paterno" class="form-control" value="" required>
+            {{Form::text('paterno',null,['class'=>'form-control','required'])}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Materno:</label>
-            <input type="text" name="materno" class="form-control" value="">
+            {{Form::text('materno',null,['class'=>'form-control'])}}
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-4">
         <label>Carnet de identidad*:</label>
-        <input type="number" name="ci" id="ci" class="form-control" required>
+            {{Form::number('ci',null,['class'=>'form-control','required'])}}
     </div>
     <div class="col-md-2">
         <label>Expedido*:</label>
-        <select name="ci_exp" id="ci_exp" class="form-control" required>
-            <option value="" disabled selected>Seleccione</option>
-            <option value="LP">LA PAZ</option>
-            <option value="CB">COCHABAMBA</option>
-            <option value="SC">SANTA CRUZ</option>
-            <option value="PT">POTOSI</option>
-            <option value="CH">CHUQUISACA</option>
-            <option value="TJ">TARIJA</option>
-            <option value="BN">BENI</option>
-            <option value="PD">PANDO</option>
-            <option value="OR">ORURO</option>
-        </select>
+        {{Form::select('ci_exp',[
+            '' => 'Seleccione',
+            'LP' => 'LA PAZ',
+            'CB' => 'COCHABAMBA',
+            'SC' => 'SANTA CRUZ',
+            'PT' => 'POTOSI',
+            'CH' => 'CHUQUISACA',
+            'TJ' => 'TARIJA',
+            'BN' => 'BENI',
+            'PD' => 'PANDO',
+            'OR' => 'ORURO',
+        ],null,['class'=>'form-control','required'])}}
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label>Correo*:</label>
-            <input type="email" name="correo" class="form-control" value="" required>
+            {{Form::email('correo',null,['class'=>'form-control','required'])}}
         </div>
     </div>
 </div>
@@ -49,13 +49,13 @@
     <div class="col-md-4">
         <div class="form-group">
             <label>Celular*:</label>
-            <input type="text" name="cel" class="form-control" value="" required>
+            {{Form::text('cel',null,['class'=>'form-control','required'])}}
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Teléfono:</label>
-            <input type="text" name="fono" class="form-control" value="">
+            {{Form::text('fono',null,['class'=>'form-control'])}}
         </div>
     </div>
     @if(isset($persona))
@@ -83,12 +83,18 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
+            <label>Rol*:</label>
+            {{Form::text('rol',null,['class'=>'form-control','required'])}}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
             <label>Usuario*:</label>
-            <select name="tipo" id="tipo" class="form-control" required>
-                <option value="" disabled selected>Seleccione</option>
-                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-                <option value="EMPLEADO">EMPLEADO</option>
-            </select>
+            {{Form::select('tipo',[
+                '' => 'Seleccione',
+                'ADMINISTRADOR' => 'ADMINISTRADOR',
+                'EMPLEADO' => 'EMPLEADO',
+            ],$empleado? $empleado->user->tipo:null,['class'=>'form-control','required'])}}
         </div>
     </div>
 </div>

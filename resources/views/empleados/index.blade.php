@@ -41,6 +41,7 @@ Empleados
                                 <th>CI</th>
                                 <th>Celular / Teléfono</th>
                                 <th>Foto</th>
+                                <th>Rol</th>
                                 <th>Tipo</th>
                                 <th>Opciones</th>
                             </tr>
@@ -66,6 +67,9 @@ Empleados
                                 </td>
                                 <td>
                                     <img src="{{asset('imgs/empleado/'.$empleado->foto)}}" alt="" class="img-table">
+                                </td>
+                                <td>
+                                    {{$empleado->rol}}
                                 </td>
                                 <td>
                                     {{$empleado->tipo}}
