@@ -1,0 +1,55 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    background: rgb(185, 185, 185);
+    background-image: url('../imgs/empresa/fondo1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.header-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header-login img{
+    margin-bottom: 5px;
+}
+
+.logo-empresa{
+    border-radius: 50%;
+    width: 160px;
+    height: 100px;
+}
+
+.contenedor-login{
+    width: 350px;
+    height: auto;
+}
+
+.titulo-empresa{
+    color:rgb(0, 39, 71);
+    font-weight: bold;
+    text-align: center;
+}
+
+.body-login{
+    height: auto;
+    border:solid 2px rgb(0, 47, 109);
+    padding: 15px;
+    background: rgb(62, 144, 250);
+    box-shadow: 5px 5px 10px 0px black;
+}
+
+.titulo-form{
+    color:white;
+    text-align: center;
+    margin-top:0px;
+}
