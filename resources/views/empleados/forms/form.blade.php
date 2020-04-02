@@ -94,7 +94,7 @@
                 '' => 'Seleccione',
                 'ADMINISTRADOR' => 'ADMINISTRADOR',
                 'EMPLEADO' => 'EMPLEADO',
-            ],$empleado? $empleado->user->tipo:null,['class'=>'form-control','required'])}}
+            ],isset($empleado)? $empleado->user->tipo:null,['class'=>'form-control','required'])}}
         </div>
     </div>
 </div>
