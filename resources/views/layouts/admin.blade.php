@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Videos</title>
+    <title>SISVENTAS | @yield('pagina')</title>
     <!-- CSS -->
     <link rel="stylesheet" href="{{asset('bootstrap-3.3.7/dist/css/bootstrap.css')}}">
 
     <!-- JQuery DataTable Css -->
-    <link href="{{asset('jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('js/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
     <link rel="stylesheet" href="{{asset('css/miEstilo.css')}}">
+    @yield('css')
 </head>
 <body>
-
+    @php
+        $empresa = sis_ventas\Empresa::first();
+    @endphp
     <header id="header">
         <div class="logo">
             <img src="{{asset('imgs/empresa/'.$empresa->logo)}}" alt="logo">
@@ -87,15 +90,15 @@
     <script src="{{asset('bootstrap-3.3.7/dist/js/bootstrap.js')}}"></script>
 
     <!-- Jquery DataTable Plugin Js -->
-    <script src="{{asset('jquery-datatable/jquery.dataTables.js')}}"></script>
-    <script src="{{asset('jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/jszip.min.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('js/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
     <script>
 
@@ -126,5 +129,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
 
     </script>
+    @yield('scripts')
+
 </body>
 </html>

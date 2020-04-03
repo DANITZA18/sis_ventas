@@ -92,7 +92,7 @@ Empleados
     </div>
 </div>
 
-@include('modal.eliminar')
+
 
 @endsection
 
