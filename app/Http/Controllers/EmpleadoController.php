@@ -10,6 +10,9 @@ use sis_ventas\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use sis_ventas\Empresa;
 
+use sis_ventas\Http\Requests\EmpleadoStoreRequest;
+use sis_ventas\Http\Requests\EmpleadoUpdateRequest;
+
 class EmpleadoController extends Controller
 {
     public function index(Request $request)
@@ -35,7 +38,7 @@ class EmpleadoController extends Controller
         abort(401, 'Acceso no autorizado');
     }
 
-    public function store(Request $request)
+    public function store(EmpleadoStoreRequest $request)
     {
         $empleadoC = new EmpleadoController();
         $nombre_usuario = $empleadoC->nombreUsuario($request->nombre,$request->paterno);
@@ -84,7 +87,7 @@ class EmpleadoController extends Controller
         abort(401, 'Acceso no autorizado');
     }
 
-    public function update(Request $request, Empleado $empleado)
+    public function update(EmpleadoUpdateRequest $request, Empleado $empleado)
     {
         $empleado->update(array_map('mb_strtoupper',$request->except('foto','correo')));
         $empleado->correo = $request->correo;
