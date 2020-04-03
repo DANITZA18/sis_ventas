@@ -9,12 +9,12 @@
     </a>
 </li>
 <li class="{{request()->is('productos*')? 'active':''}}">
-    <a href="{{route('productos.index')}}">
+    <a href="{{route('home')}}">
     <i class="fa fa-wine-bottle"></i> <span>Productos</span>
     </a>
 </li>
 <li class="{{request()->is('descuentos*')? 'active':''}}">
-    <a href="{{route('descuentos.index')}}">
+    <a href="{{route('home')}}">
     <i class="fa fa-percentage"></i> <span>Descuentos</span>
     </a>
 </li>
