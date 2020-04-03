@@ -77,7 +77,9 @@ Empleados
                                 <td class="btns-opciones">
                                     <a href="{{route('users.edit',$empleado->id)}}" class="modificar"><i class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Modificar"></i></a>
 
-                                    <a href="{{route('users.destroy',$empleado->id)}}" data-toggle="modal" data-target="#modal-eliminar" class="eliminar"><i class="fa fa-trash" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></a>
+                                    <a href="{{route('users.informacionEmpleado',$empleado->id)}}" target="_blank" class="evaluar"><i class="fa fa-eye" data-toggle="tooltip" data-placement="left" title="Información"></i></a>
+
+                                    <a href="#" data-url="{{route('users.destroy',$empleado->id)}}" data-toggle="modal" data-target="#modal-eliminar" class="eliminar"><i class="fa fa-trash" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -107,6 +109,7 @@ Empleados
             {width:"14%"},
             {width:"8%"},
             {width:"10%"},
+            {width:"10%"},
             {width:"15%"}
         ],
         scrollX: true,
@@ -120,8 +123,8 @@ Empleados
     $(document).on('click','table.data-table tbody tr td.btns-opciones a.eliminar',function(e){
         e.preventDefault();
         let usuario = $(this).parents('tr').children('td').eq(2).text();
-        $('#mensajeEliminar').text(`¿Está seguro(a) de eliminar al usuario <b>${usuario}</b>?`);
-        let url = $(this).attr('href');
+        $('#mensajeEliminar').html(`¿Está seguro(a) de eliminar al usuario <b>${usuario}</b>?`);
+        let url = $(this).attr('data-url');
         $('#formEliminar').prop('action',url);
     });
 
