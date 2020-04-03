@@ -37,6 +37,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::delete('users/destroy/{empleado}','EmpleadoController@destroy')->name('users.destroy');
     
+    //Ver información del empleado en un pdf
+    Route::get('users/informacionEmpleado/{empleado}','EmpleadoController@informacionEmpleado')->name('users.informacionEmpleado');
+
     // Configuración de cuenta
         // contraseña
     // Route::GET('users/configurar/cuenta/{user}','DatosUsuarioController@config_cuenta')->name('users.config');
