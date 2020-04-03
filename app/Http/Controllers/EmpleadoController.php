@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use sis_ventas\Empleado;
 use sis_ventas\User;
+
+use Barryvdh\DomPDF\Facade as PDF;
+use sis_ventas\Empresa;
+
 class EmpleadoController extends Controller
 {
     public function index(Request $request)
@@ -71,6 +75,52 @@ class EmpleadoController extends Controller
         return redirect()->route('users.index')->with('bien','Empleado registrado con éxito');
     }
 
+    public function edit(Empleado $empleado, Request $request)
+    {
+        if($request->user()->tipo == 'ADMINISTRADOR')
+        {
+            return view('empleados.edit',compact('empleado'));
+        }
+        abort(401, 'Acceso no autorizado');
+    }
+
+    public function update(Request $request, Empleado $empleado)
+    {
+        $empleado->update(array_map('mb_strtoupper',$request->except('foto','correo')));
+        $empleado->correo = $request->correo;
+        $empleado->save();
+        if($request->hasFile('foto'))
+        {
+            // ELIMINAR FOTO ANTIGUA
+            $foto_antigua = $empleado->foto;
+            if($foto_antigua != 'user_default.png')
+            {
+                \File::delete(public_path()."/imgs/empleado/".$foto_antigua);
+            }
+            // SUBIR NUEVA FOTO
+            $file_foto = $request->file('foto');
+            $extension = ".".$file_foto->getClientOriginalExtension();
+            $nom_foto = $empleado->user->name.str_replace(' ','_',$empleado->nom).time().$extension;
+            $file_foto->move(public_path()."/imgs/empleado/",$nom_foto);
+            $empleado->foto = $nom_foto;
+            $empleado->save();
+        }
+        return redirect()->route('users.index')->with('bien','Registro modificado con éxito');
+    }
+
+    public function show(Empleado $empleado)
+    {
+
+    }
+
+    public function destroy(Empleado $empleado,Request $request)
+    {
+        $empleado->user->estado = 0;
+        $empleado->user->save();
+        //redireccionar a la vista index
+        return redirect()->route('users.index')->with('bien','Registro elimnado');
+    }
+
     public function nombreUsuario($nom, $apep)
     {
         //determinando el nombre de usuario inicial del 1er_nombre+apep+tipoUser
@@ -79,4 +129,13 @@ class EmpleadoController extends Controller
 
         return $nombre_user;
     }
+
+    public function informacionEmpleado(Empleado $empleado)
+    {
+        $empresa = Empresa::first();
+        $date = date('d/m/Y');
+        $pdf = PDF::loadView('empleados.pdf',compact('empleado','date','empresa'));
+        return $pdf->stream('Empelado.pdf');
+    }
 }
+
