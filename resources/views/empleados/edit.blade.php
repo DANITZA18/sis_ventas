@@ -21,7 +21,7 @@ Modificar Empleado
                     <h2 class="titulo_panel">MODIFICAR EMPLEADO</h2>
                 </div>
                 <div class="panel-body">
-                {!! Form::model($empleado,['route'=>['users.update',$empleado->id],'method'=>'PUT']) !!}
+                {!! Form::model($empleado,['route'=>['users.update',$empleado->id],'method'=>'PUT','files'=>"true"]) !!}
                     @include('empleados.forms.form')
                     <div class="row">
                         <div class="col-md-12">

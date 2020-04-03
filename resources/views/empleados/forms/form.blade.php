@@ -45,12 +45,18 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label>Correo*:</label>
-            {{Form::email('correo',null,['class'=>'form-control','required'])}}
+            <label>Dirección*:</label>
+            {{Form::text('dir',null,['class'=>'form-control','required'])}}
         </div>
     </div>
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Correo*:</label>
+            {{Form::email('correo',null,['class'=>'form-control','required'])}}
+        </div>
+    </div>
     <div class="col-md-4">
         <div class="form-group">
             <label>Celular*:</label>
@@ -63,27 +69,6 @@
             {{Form::text('fono',null,['class'=>'form-control'])}}
         </div>
     </div>
-    @if(isset($persona))
-    <div class="col-md-4 contenedor_foto">
-        <img src="{{ asset('imgs/persona/'.$persona->foto) }}" width="150" height="155" id="imagen_select">
-        <div class="form-group contenedor_subir">
-            <input type="file" accept="image/*" style='opacity: 0;' name="foto" class="file" id="foto">
-            <label class="subir"for="foto">
-                <i class="fa fa-image"></i> <span>Elegir foto</span>
-            </label>
-        </div>
-    </div>
-    @else
-    <div class="col-md-4 contenedor_foto">
-        <img src="{{ asset('imgs/users/user_default.png') }}" width="150" height="155" id="imagen_select">
-        <div class="form-group contenedor_subir">
-            <input type="file" accept="image/*" style='opacity: 0;' name="foto" class="file" id="foto">
-            <label class="subir"for="foto">
-                <i class="fa fa-image"></i> <span>Elegir foto</span>
-            </label>
-        </div>
-    </div>
-    @endif
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -102,4 +87,25 @@
             ],isset($empleado)? $empleado->user->tipo:null,['class'=>'form-control','required'])}}
         </div>
     </div>
+    @if(isset($empleado))
+    <div class="col-md-4 contenedor_foto">
+        <img src="{{ asset('imgs/empleado/'.$empleado->foto) }}" width="150" height="155" id="imagen_select">
+        <div class="form-group contenedor_subir">
+            <input type="file" accept="image/*" style='opacity: 0;' name="foto" class="file" id="foto">
+            <label class="subir"for="foto">
+                <i class="fa fa-image"></i> <span>Elegir foto</span>
+            </label>
+        </div>
+    </div>
+    @else
+    <div class="col-md-4 contenedor_foto">
+        <img src="{{ asset('imgs/users/user_default.png') }}" width="150" height="155" id="imagen_select">
+        <div class="form-group contenedor_subir">
+            <input type="file" accept="image/*" style='opacity: 0;' name="foto" class="file" id="foto">
+            <label class="subir"for="foto">
+                <i class="fa fa-image"></i> <span>Elegir foto</span>
+            </label>
+        </div>
+    </div>
+    @endif
 </div>

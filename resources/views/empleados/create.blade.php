@@ -21,7 +21,7 @@ Registrar Empleado
                     <h2 class="titulo_panel">REGISTRAR EMPLEADO</h2>
                 </div>
                 <div class="panel-body">
-                {!! Form::open(['route'=>'users.store','method'=>'POST']) !!}
+                {!! Form::open(['route'=>'users.store','method'=>'POST','files'=>'true']) !!}
                     @include('empleados.forms.form')
                     <div class="row">
                         <div class="col-md-12">
