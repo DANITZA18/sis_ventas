@@ -61,4 +61,10 @@ Route::middleware(['auth'])->group(function(){
     Route::put('medidas/update/{medida}','MedidaController@update')->name('medidas.update');
 
     Route::delete('medidas/destroy/{medida}','MedidaController@destroy')->name('medidas.destroy');
+
+
+    // SOLICITUD DE CONTRASEÑAS
+    Route::get('solicitudes','SolicitudController@index')->name('solicitudes.index');
+
+    Route::POST('solicitudes/asignar/{solicitud}','SolicitudController@asignar')->name('solicitudes.asignar');
 });
