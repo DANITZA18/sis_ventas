@@ -29,24 +29,12 @@ Route::middleware(['auth'])->group(function(){
     // USUARIOS
     Route::get('users','EmpleadoController@index')->name('users.index');
 
-    Route::get('users/create','EmpleadoController@create')->name('users.create');
-
-    Route::get('users/show/{empleado}','EmpleadoController@show')->name('users.show');
-
     Route::get('users/edit/{empleado}','EmpleadoController@edit')->name('users.edit');
 
     Route::post('users/store','EmpleadoController@store')->name('users.store');
 
     Route::put('users/update/{empleado}','EmpleadoController@update')->name('users.update');
 
-    Route::delete('users/destroy/{empleado}','EmpleadoController@destroy')->name('users.destroy');
-    
-    //Ver información del empleado en un pdf
-    Route::get('users/informacionEmpleado/{empleado}','EmpleadoController@informacionEmpleado')->name('users.informacionEmpleado');
-
-    // Configuración de cuenta
-    //     contraseña
-    Route::GET('configurar/cuenta/{user}','EmpleadoController@config_cuenta')->name('users.config');
     Route::PUT('configurar/cuenta/update/{user}','EmpleadoController@cuenta_update')->name('users.config_update');
         // foto de perfil
     Route::POST('configurar/cuenta/update/foto/{user}','EmpleadoController@cuenta_update_foto')->name('users.config_update_foto');
