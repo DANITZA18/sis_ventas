@@ -64,3 +64,10 @@ Modificar cliente
 // FIN SUBIR IMAGEN
 
 
+//DateMask
+$('[data-mask]').inputmask();
+</script>
+@endsection
+
+
+
