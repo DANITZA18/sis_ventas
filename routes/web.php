@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('auth.login',compact('empresa'));
 });
 
+Route::get('solicitudes/create','SolicitudController@create')->name('solicitudes.create');
+    
+Route::POST('solicitudes/store','SolicitudController@store')->name('solicitudes.store');
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
@@ -41,11 +45,66 @@ Route::middleware(['auth'])->group(function(){
     Route::get('users/informacionEmpleado/{empleado}','EmpleadoController@informacionEmpleado')->name('users.informacionEmpleado');
 
     // Configuración de cuenta
-        // contraseña
-    // Route::GET('users/configurar/cuenta/{user}','DatosUsuarioController@config_cuenta')->name('users.config');
-    // Route::PUT('users/configurar/cuenta/update/{user}','DatosUsuarioController@cuenta_update')->name('users.config_update');
-    //     // foto de perfil
-    // Route::POST('users/configurar/cuenta/update/foto/{user}','DatosUsuarioController@cuenta_update_foto')->name('users.config_update_foto');
+    //     contraseña
+    Route::GET('configurar/cuenta/{user}','EmpleadoController@config_cuenta')->name('users.config');
+    Route::PUT('configurar/cuenta/update/{user}','EmpleadoController@cuenta_update')->name('users.config_update');
+        // foto de perfil
+    Route::POST('configurar/cuenta/update/foto/{user}','EmpleadoController@cuenta_update_foto')->name('users.config_update_foto');
+
+    // DESCUENTOS
+    Route::get('descuentos','DescuentoController@index')->name('descuentos.index');
+
+    Route::get('descuentos/create','DescuentoController@create')->name('descuentos.create');
+
+    Route::get('descuentos/show/{descuento}','DescuentoController@show')->name('descuentos.show');
+
+    Route::get('descuentos/edit/{descuento}','DescuentoController@edit')->name('descuentos.edit');
+
+    Route::post('descuentos/store','DescuentoController@store')->name('descuentos.store');
+
+    Route::put('descuentos/update/{descuento}','DescuentoController@update')->name('descuentos.update');
+
+    Route::delete('descuentos/destroy/{descuento}','DescuentoController@destroy')->name('descuentos.destroy');
+
+    Route::get('descuentos/info','DescuentoController@info')->name('descuentos.info');
+
+    // PRODUCTOS
+    Route::get('productos','ProductoController@index')->name('productos.index');
+
+    Route::get('productos/create','ProductoController@create')->name('productos.create');
+
+    Route::get('productos/show/{producto}','ProductoController@show')->name('productos.show');
+
+    Route::get('productos/edit/{producto}','ProductoController@edit')->name('productos.edit');
+
+    Route::post('productos/store','ProductoController@store')->name('productos.store');
+
+    Route::post('productos/ingreso/{producto}','ProductoController@ingreso')->name('productos.ingreso');
+
+    Route::put('productos/update/{producto}','ProductoController@update')->name('productos.update');
+
+    Route::delete('productos/destroy/{producto}','ProductoController@destroy')->name('productos.destroy');
+
+    Route::get('productos/infoProducto/{producto}','ProductoController@infoProducto')->name('productos.infoProducto');
+
+    Route::get('masVendidos','ProductoController@masVendidos')->name('productos.masVendidos');
+
+    Route::get('estadisticas','ProductoController@estadisticas')->name('productos.estadisticas');
+
+    // PROMOCIONES
+    Route::get('promociones','PromocionController@index')->name('promociones.index');
+
+    Route::get('promociones/create','PromocionController@create')->name('promociones.create');
+
+    Route::get('promociones/show/{promocion}','PromocionController@show')->name('promociones.show');
+
+    Route::get('promociones/edit/{promocion}','PromocionController@edit')->name('promociones.edit');
+
+    Route::post('promociones/store','PromocionController@store')->name('promociones.store');
+
+    Route::put('promociones/update/{promocion}','PromocionController@update')->name('promociones.update');
+
+    Route::delete('promociones/destroy/{promocion}','PromocionController@destroy')->name('promociones.destroy');
 
     // CLIENTES
     Route::get('clientes','ClienteController@index')->name('clientes.index');
@@ -63,21 +122,27 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('clientes/destroy/{cliente}','ClienteController@destroy')->name('clientes.destroy');
 
     Route::get('clientes/habilitar/{cliente}','ClienteController@habilitar')->name('clientes.habilitar');
+
+
+    // VENTAS
+    Route::get('ventas','VentaController@index')->name('ventas.index');
+
+    Route::get('ventas/create','VentaController@create')->name('ventas.create');
+
+    Route::get('ventas/show/{venta}','VentaController@show')->name('ventas.show');
+
+    Route::get('ventas/edit/{venta}','VentaController@edit')->name('ventas.edit');
+
+    Route::post('ventas/store','VentaController@store')->name('ventas.store');
+
+    Route::put('ventas/update/{venta}','VentaController@update')->name('ventas.update');
+
+    Route::delete('ventas/destroy/{venta}','VentaController@destroy')->name('ventas.destroy');
     
-    
-    // MEDIDAS
-    Route::get('medidas','MedidaController@index')->name('medidas.index');
+    Route::get('ventas/factura/{venta}','VentaController@factura')->name('ventas.factura');
 
-    Route::get('medidas/create','MedidaController@create')->name('medidas.create');
+    // SOLICITUD DE CONTRASEÑAS
+    Route::get('solicitudes','SolicitudController@index')->name('solicitudes.index');
 
-    Route::get('medidas/show/{medida}','MedidaController@show')->name('medidas.show');
-
-    Route::get('medidas/edit/{medida}','MedidaController@edit')->name('medidas.edit');
-
-    Route::post('medidas/store','MedidaController@store')->name('medidas.store');
-
-    Route::put('medidas/update/{medida}','MedidaController@update')->name('medidas.update');
-
-    Route::delete('medidas/destroy/{medida}','MedidaController@destroy')->name('medidas.destroy');
-    
+    Route::POST('solicitudes/asignar/{solicitud}','SolicitudController@asignar')->name('solicitudes.asignar');
 });
