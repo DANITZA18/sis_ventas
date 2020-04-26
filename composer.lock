@@ -89,9 +89,9 @@
             "authors": [
                 {
                     "name": "Ben Scholzen 'DASPRiD'",
-                    "role": "Developer",
                     "email": "mail@dasprids.de",
-                    "homepage": "http://www.dasprids.de"
+                    "homepage": "http://www.dasprids.de",
+                    "role": "Developer"
                 }
             ],
             "description": "BaconQrCode is a QR code generator for PHP.",
@@ -918,9 +918,9 @@
             "authors": [
                 {
                     "name": "Syed Irfaq R.",
-                    "role": "Developer",
                     "email": "syed@lukonet.com",
-                    "homepage": "https://lukonet.com"
+                    "homepage": "https://lukonet.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Telegram Notifications Driver",
