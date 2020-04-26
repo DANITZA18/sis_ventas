@@ -140,5 +140,58 @@ class EmpleadoController extends Controller
         $pdf = PDF::loadView('empleados.pdf',compact('empleado','date','empresa'));
         return $pdf->stream('Empelado.pdf');
     }
-}
 
+
+    /* CONFIGURACIÓN DE CUENTAS */
+    // FUNCIONES PARA CONFIGURAR LA CUENTA DEL USUARIO
+    public function config_cuenta(User $user){
+        $empresa = Empresa::first();
+        return view('empleados.config',compact('empresa','user'));
+    }
+
+    public function cuenta_update(Request $request, User $user){
+        if($request->oldPassword){
+            if(Hash::check($request->oldPassword,$user->password)){
+                if($request->newPassword == $request->password_confirm){
+                    $user->password = Hash::make($request->newPassword);
+                    $user->save();
+                    return redirect()->route('users.config',$user->id)->with('password','Contraseña actualizada con éxito');
+                }
+                else{
+                    return redirect()->route('users.config',$user->id)->with('contra_error','comfirm');
+                }
+            }
+            else{
+                return redirect()->route('users.config',$user->id)->with('contra_error','old_password');
+            }
+        }
+    }
+
+    public function cuenta_update_foto(Request $request, User $user){
+        if($request->hasFile('foto')){
+            $archivo_img = $request->file('foto');
+            $extension = '.'.$archivo_img->getClientOriginalExtension();
+            $codigo = $user->name;
+            $path = public_path().'/imgs/users/'.$user->foto;
+            if($user->foto != 'user_default.png')
+            {
+                \File::delete($path);
+            }
+            // SUBIENDO FOTO AL SERVIDOR
+            if($user->datosUsuario)
+            {
+                $name_foto = $codigo.$user->datosUsuario->nom_u.time().$extension;//determinar el nombre de la imagen y su extesion
+            }
+            else{
+                $name_foto = $codigo.time().$extension;//determinar el nombre de la imagen y su extesion
+            }
+            $name_foto = str_replace(' ', '_', $name_foto);
+            $archivo_img->move(public_path().'/imgs/users/',$name_foto);//mover el archivo a la carpeta de destino
+
+            $user->foto = $name_foto;
+            $user->save();
+
+        }
+        return redirect()->route('users.config',$request->user()->id)->with('foto','Foto actualizado con éxito');
+    }
+}
