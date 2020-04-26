@@ -10,6 +10,9 @@
     <!-- JQuery DataTable Css -->
     <link href="{{asset('js/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
+    {{-- Highcharts --}}
+    <link rel="stylesheet"src="{{asset('Highcharts/code/css/highcharts.css')}}">
+
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
     <link rel="stylesheet" href="{{asset('css/miEstilo.css')}}">
     @yield('css')
@@ -27,7 +30,7 @@
         </div>
         <div class="usuario">
             <div class="icono">
-                <i class="far fa-user"></i>
+                <img src="{{asset('imgs/users/'.Auth::user()->foto)}}" alt="Foto">
             </div>
             <div class="nom_usuario">
                 @if(Auth::user()->empleado)
@@ -68,6 +71,12 @@
                 </ul>
     
                 <ul class="nav navbar-nav navbar-right">
+                    <li data-toggle="tooltip" title="Configurar cuenta" class="{{request()->is('configurar*')? 'active':''}}" data-placement="bottom">
+                        <a href="{{route('users.config',Auth::user()->id)}}">
+                            <i class="fa fa-cog"></i>
+                            {{-- <span>SALIR</span> --}}
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -100,7 +109,24 @@
     <script src="{{asset('js/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
     <script src="{{asset('js/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
+    <!-- Highcharts -->
+    <script src="{{asset('Highcharts/code/highcharts.js')}}"></script>
+    <script src="{{asset('Highcharts/code/modules/data.js')}}"></script>
+    <script src="{{asset('Highcharts/code/modules/exporting.js')}}"></script>
+    {{-- <script src="{{asset('Highcharts/code/modules/export-data.js')}}"></script> --}}
+    <script src="{{asset('Highcharts/code/highcharts-3d.js')}}"></script>
+
     <script>
+
+    Highcharts.setOptions({
+        lang:{
+            printChart:'Imprimir',
+            downloadJPEG:'Descargar JPEG',
+            downloadPNG:'Descargar PNG',
+            downloadPDF:'Descargar documento PDF',
+            downloadSVG:'Descargar archivo SVG',
+        }
+    });
 
     $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
