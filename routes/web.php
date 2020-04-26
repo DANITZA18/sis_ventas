@@ -61,5 +61,5 @@ Route::middleware(['auth'])->group(function(){
     Route::put('medidas/update/{medida}','MedidaController@update')->name('medidas.update');
 
     Route::delete('medidas/destroy/{medida}','MedidaController@destroy')->name('medidas.destroy');
-
+    
 });
