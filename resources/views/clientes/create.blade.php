@@ -15,3 +15,23 @@ Registrar cliente
         <div class="col-md-12">
            <h3 class="titulo_form">CLIENTES</h3>
         </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="titulo_panel">REGISTRAR CLIENTE</h2>
+                </div>
+                <div class="panel-body">
+                {!! Form::open(['route'=>'clientes.store','method'=>'POST','files'=>'true']) !!}
+                    @include('clientes.forms.form')
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success">Registrar</button>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
