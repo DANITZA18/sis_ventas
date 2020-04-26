@@ -135,11 +135,6 @@ Route::middleware(['auth'])->group(function(){
 
     Route::post('ventas/store','VentaController@store')->name('ventas.store');
 
-    Route::put('ventas/update/{venta}','VentaController@update')->name('ventas.update');
-
-    Route::delete('ventas/destroy/{venta}','VentaController@destroy')->name('ventas.destroy');
-    
-    Route::get('ventas/factura/{venta}','VentaController@factura')->name('ventas.factura');
 
     // SOLICITUD DE CONTRASEÑAS
     Route::get('solicitudes','SolicitudController@index')->name('solicitudes.index');
