@@ -64,3 +64,4 @@ Registrar Empleado
 // FIN SUBIR IMAGEN
 </script>
 @endsection
+
