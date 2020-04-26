@@ -55,6 +55,11 @@
         <div class="form-group">
             <label>Correo*:</label>
             {{Form::email('correo',null,['class'=>'form-control','required'])}}
+            @if ($errors->has('correo'))
+            <span class="invalid-feedback" style="color:red;" role="alert">
+                <strong>{{ $errors->first('correo') }}</strong>
+            </span>
+            @endif
         </div>
     </div>
     <div class="col-md-4">
