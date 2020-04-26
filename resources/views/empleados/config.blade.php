@@ -154,4 +154,30 @@ Configurar cuenta
 
 @section('scripts')
 <script type="text/javascript">
-      
+//EDICION DE IMAGENES
+      //Previsualizar la imagen seleccionada
+      $('body').on('change','#foto',function(e){
+        addImage(e);
+    });
+      function addImage(e){
+        var file = e.target.files[0],
+        imageType = /image.*/;
+
+        if (!file.type.match(imageType))
+            return;
+
+        var reader = new FileReader();
+        reader.onload = fileOnload;
+        reader.readAsDataURL(file);
+    }
+    function fileOnload(e) {
+        var result=e.target.result;
+        $('#imagen_select').attr("src",result);
+    }
+
+    function cambiar(){
+        var pdrs = document.getElementById('foto').files[0].name;
+        document.getElementById('info').innerHTML = pdrs;
+    }
+</script>
+@endsection
