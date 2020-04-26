@@ -12,3 +12,25 @@
         </span>
         @endif
     </div>
+    <div class="col-md-2">
+        <label>Expedido*:</label>
+        {{Form::select('ci_exp',[
+            '' => 'Seleccione',
+            'LP' => 'LA PAZ',
+            'CB' => 'COCHABAMBA',
+            'SC' => 'SANTA CRUZ',
+            'PT' => 'POTOSI',
+            'CH' => 'CHUQUISACA',
+            'TJ' => 'TARIJA',
+            'BN' => 'BENI',
+            'PD' => 'PANDO',
+            'OR' => 'ORURO',
+        ],null,['class'=>'form-control','required'])}}
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Celular*:</label>
+            {{Form::text('cel',null,['class'=>'form-control','required'])}}
+        </div>
+    </div>
+</div>
