@@ -47,6 +47,24 @@ Route::middleware(['auth'])->group(function(){
     //     // foto de perfil
     // Route::POST('users/configurar/cuenta/update/foto/{user}','DatosUsuarioController@cuenta_update_foto')->name('users.config_update_foto');
 
+    // CLIENTES
+    Route::get('clientes','ClienteController@index')->name('clientes.index');
+
+    Route::get('clientes/create','ClienteController@create')->name('clientes.create');
+
+    Route::get('clientes/show/{cliente}','ClienteController@show')->name('clientes.show');
+
+    Route::get('clientes/edit/{cliente}','ClienteController@edit')->name('clientes.edit');
+
+    Route::post('clientes/store','ClienteController@store')->name('clientes.store');
+
+    Route::put('clientes/update/{cliente}','ClienteController@update')->name('clientes.update');
+
+    Route::delete('clientes/destroy/{cliente}','ClienteController@destroy')->name('clientes.destroy');
+
+    Route::get('clientes/habilitar/{cliente}','ClienteController@habilitar')->name('clientes.habilitar');
+    
+    
     // MEDIDAS
     Route::get('medidas','MedidaController@index')->name('medidas.index');
 
