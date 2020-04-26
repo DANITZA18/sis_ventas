@@ -43,3 +43,28 @@ class ClienteController extends Controller
         }
         abort(401, 'Acceso no autorizado');
     }
+    public function update(ClienteUpdateRequest $request, Cliente $cliente)
+    {
+        $cliente->update(array_map('mb_strtoupper',$request->all()));
+        return redirect()->route('clientes.index')->with('bien','Cliente modificado con éxito');
+    }
+
+    public function show(Cliente $cliente)
+    {
+
+    }
+
+    public function destroy(Cliente $cliente)
+    {
+        $cliente->estado = 0;
+        $cliente->save();
+        return redirect()->route('clientes.index')->with('bien','Baja registrada correctamente');
+    }
+
+    public function habilitar(Cliente $cliente)
+    {
+        $cliente->estado = 1;
+        $cliente->save();
+        return redirect()->route('clientes.index')->with('bien','Cliente habilitado correctamente');
+    }
+} 
