@@ -44,6 +44,9 @@
                 <div class="form-group" style="display:flex; justify-content: center;">
                     <button type="submit" class="btn btn-default">Acceder</button>
                 </div>
+                <div class="recuperacion">
+                    <a href="{{route('solicitudes.create')}}">Olvide mi contraseña</a>
+                </div>
             </form>
         </div>
     </div>

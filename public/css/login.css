@@ -41,6 +41,8 @@ body{
 }
 
 .body-login{
+    max-width: 350px!important;
+    min-width: 350px!important;
     height: auto;
     border:solid 2px rgb(0, 47, 109);
     padding: 15px;
@@ -52,4 +54,21 @@ body{
     color:white;
     text-align: center;
     margin-top:0px;
+}
+
+.recuperacion{
+    width: 100%;
+    display: flex;
+}
+
+.recuperacion a{
+    width: 100%;
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.recuperacion a:hover{
+    color:rgb(161, 217, 255);
 }
