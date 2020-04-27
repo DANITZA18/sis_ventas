@@ -102,10 +102,16 @@ header .usuario{
 header .usuario .icono{
     text-align: center;
     font-size: 25px;
-    border:solid 1px;
     padding: 5px;
     border-radius: 50%;
     width: 40px;
+}
+
+header .usuario .icono img{
+    border:solid 2px rgb(139, 139, 139);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 header .usuario .nom_usuario{
