@@ -81,4 +81,90 @@ class ProductoController extends Controller
             return redirect()->route('productos.index')->with('bien','Registro elimnado');
         }
     }
+    public function ingreso(Request $request, Producto $producto)
+    {
+        $producto->ingresos = $request->cantidad + $producto->ingresos;
+        $producto->disponible = $request->cantidad + $producto->disponible;
+        $producto->save();
+        return redirect()->route('productos.index')->with('bienIngreso','Ingreso del producto '.$producto->nom.' registrado con éxito');
+    }
+
+    public function infoProducto(Producto $producto,Request $request)
+    {
+        // COMPROBAR SI EL PRODUCTO TIENE ALGUNA PROMOCIÓN VIGENTE
+        $promocion = Promocion::where('producto_id',$producto->id)
+                                ->where('fecha_fin','>=',date('Y-m-d'))
+                                ->get()
+                                ->first();
+        $promocion_id= '';
+
+        $select_descuentos = '<select class="form-control">';
+        $descuentos = Descuento::all();
+        if(count($descuentos) > 0)
+        {
+            foreach($descuentos as $descuento)
+            {
+                // si existe una promocion y ademas cumple la cantidad que se indica para seleccionar el descuento
+                if($promocion && $request->cantidad >= $promocion->inicio)
+                {
+                    if($promocion->fin == null)
+                    {
+                        if($descuento->id == $promocion->descuento_id)
+                        {
+                            $select_descuentos.= '<option value="'.$descuento->id.'" selected>'.number_format($descuento->descuento,2).'</option>';
+                        }
+                        else{
+                            $select_descuentos.= '<option value="'.$descuento->id.'">'.number_format($descuento->descuento,2).'</option>';
+                        }
+                        $promocion_id = $promocion->id;
+                    }
+                    else{
+                        if($request->cantidad <= $promocion->fin)
+                        {
+                            if($descuento->id == $promocion->descuento_id)
+                            {
+                                $select_descuentos.= '<option value="'.$descuento->id.'" selected>'.number_format($descuento->descuento,2).'</option>';
+                            }
+                            else{
+                                $select_descuentos.= '<option value="'.$descuento->id.'">'.number_format($descuento->descuento,2).'</option>';
+                            }
+                            $promocion_id = $promocion->id;
+                        }
+                        else{
+                            if($descuento->descuento == 0.00)
+                            {
+                                $select_descuentos.= '<option value="'.$descuento->id.'" selected>'.number_format($descuento->descuento,2).'</option>';
+                            }
+                            else{
+                                $select_descuentos.= '<option value="'.$descuento->id.'">'.number_format($descuento->descuento,2).'</option>';
+                            }
+                        }
+                    }
+                }
+                else{
+                    if($descuento->descuento == 0.00)
+                    {
+                        $select_descuentos.= '<option value="'.$descuento->id.'" selected>'.number_format($descuento->descuento,2).'</option>';
+                    }
+                    else{
+                        $select_descuentos.= '<option value="'.$descuento->id.'">'.number_format($descuento->descuento,2).'</option>';
+                    }
+                }
+
+            }
+        }
+        else{
+            $select_descuentos.= '<option value="0" selected disabled>0.00</option>';
+        }
+
+        $select_descuentos.='</select>';
+
+        return response()->JSON([
+            'nombre' => $producto->nom,
+            'costo' => $producto->costo,
+            'select_descuentos' => $select_descuentos,
+            'promocion_id' => $promocion_id
+        ]);
+    }
+
 }
