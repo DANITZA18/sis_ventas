@@ -46,4 +46,39 @@ class ProductoController extends Controller
         }
         abort(401, 'Acceso no autorizado');
     }
+    public function update(Request $request, Producto $producto)
+    {
+        $comprueba = DetalleVenta::where('producto_id',$producto->id)->get();
+        if(count($comprueba) > 0)
+        {
+            $producto->update(array_map('mb_strtoupper',$request->except('ingresos')));
+            $producto->save();
+            return redirect()->route('productos.index')->with('noActualizable','El producto que desea actualizar ya tiene ventas realizadas por lo que los cambios solo tendran efecto sobre el nombre y descripción.')
+            ->with('bien','Producto modificado con éxito');
+        }
+        else{
+            $producto->update(array_map('mb_strtoupper',$request->all()));
+            $producto->disponible = $request->ingresos;
+            $producto->save();
+            return redirect()->route('productos.index')->with('bien','Producto modificado con éxito');
+        }
+    }
+
+    public function show(Producto $producto)
+    {
+
+    }
+
+    public function destroy(Producto $producto)
+    {
+        $comprueba = DetalleVenta::where('producto_id',$producto->id)->get()->first();
+        if($comprueba)
+        {
+            return redirect()->route('productos.index')->with('uso','No se puede eliminar el registro porque esta siendo utilizado');
+        }
+        else{
+            $producto->delete();
+            return redirect()->route('productos.index')->with('bien','Registro elimnado');
+        }
+    }
 }
