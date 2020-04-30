@@ -166,5 +166,48 @@ class ProductoController extends Controller
             'promocion_id' => $promocion_id
         ]);
     }
+    public function masVendidos(Request $request)
+    {
+        if($request->user()->tipo == 'ADMINISTRADOR' || $request->user()->tipo == 'EMPLEADO')
+        {
+            return view('productos.masVendidos');
+        }
+        abort(401, 'Acceso no autorizado');
+    }
+
+    public function estadisticas(Request $request)
+    {
+        $filtro = $request->filtro;
+        $fecha_ini = $request->fecha_ini;
+        $fecha_fin = $request->fecha_fin;
+
+        $productos = Producto::all();
+        $datos = [];
+        $categorias = [];
+        foreach($productos as $producto)
+        {
+            $detalles = DetalleVenta::where('producto_id',$producto->id)->get(); 
+            if($filtro != 1)
+            {
+                $detalles = DetalleVenta::select('detalle_ventas.*')
+                                        ->join('ventas','ventas.id','=','detalle_ventas.venta_id')
+                                        ->where('producto_id',$producto->id)
+                                        ->whereBetween('ventas.fecha_venta',[$fecha_ini,$fecha_fin])
+                                        ->get(); 
+            }
+            $cantidad = 0;
+            if(count($detalles) > 0)
+            {
+                $cantidad = DetalleVenta::where('producto_id', $producto->id)->get()->sum('cantidad');
+              
+            }
+            $datos[] = [$producto->nom,(int)$cantidad];
+            $categorias[] = $producto->nom;
+        }
+        return response()->JSON([
+            'datos'=>$datos,
+        ]);
+    }
+
 
 }
