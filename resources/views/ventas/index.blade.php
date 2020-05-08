@@ -109,7 +109,18 @@ Ventas
         language: lenguaje,
         pageLength:"25"
     });
- 
+    // ELIMINAR
+    $(document).on('click','table.data-table tbody tr td.btns-opciones a.eliminar',function(e){
+        e.preventDefault();
+        let registro = $(this).parents('tr').children('td').eq(1).text();
+        $('#mensajeEliminar').html(`¿Está seguro(a) de eliminar el registro <b>${registro}</b>?`);
+        let url = $(this).attr('data-url');
+        $('#formEliminar').prop('action',url);
+    });
+
+    $('#btnEliminar').click(function(){
+        $('#formEliminar').submit();
+    });
 
 </script>
 @endsection
