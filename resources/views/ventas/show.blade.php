@@ -83,7 +83,56 @@ Información venta
                                             <td>{{$detalle->total}}</td>
                                         </tr>
                                     @endforeach
+                                    <tr class="total_final">
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td class="derecha">
+                                            TOTAL (Bs.)
+                                        </td>
+                                        <td>
+                                            {{$venta->total}}
+                                        </td>
+                                    </tr>
+                                    <tr class="total_final">
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td class="derecha">
+                                            TOTAL FINAL (Bs.)
+                                        </td>
+                                        <td>
+                                            {{$venta->total_final}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>                  
+                        </div>                            
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="info1">
+                                "ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAÍS EL USO ILÍCITO DE ÉSTA SERA SANCIONADO A LEY"
+                            </div>
+                            <div class="info2">
+                                Ley Nº 453: El proveedor debe exhibir certificaciones de habilitación o documentos que acrediten las capacidades u ofertas de servicios.
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">   
+                        <div class="col-md-12">
+                            <a href="{{route('ventas.factura',$venta->id)}}" target="_blank" class="btn btn-success">Exportar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                                    
 @endsection
 
