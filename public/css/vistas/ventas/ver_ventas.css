@@ -1,0 +1,125 @@
+.titulo{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: 80px;
+    width: 450px;
+}
+
+.titulo p.dir{
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0;
+    margin-bottom: 0px;
+}
+
+.titulo p.activi{
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0;
+    }
+
+.titulo h2{
+    text-align: center;
+}
+
+.titulo_derecha{
+    position: absolute;
+    top: 10px;
+    right:45px;
+}
+
+.titulo_derecha h2{
+        text-align: center;
+        font-size: 1em;
+        color:#008b35;
+        font-family: Calibri, sans-serif;
+        border:solid 1px #008b35;
+        background: #c1f5d4;
+        margin-bottom: 2px;
+}
+
+.titulo_derecha .contenedor_info{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    border:solid 1px #008b35;
+}
+
+.titulo_derecha .contenedor_info p.info{
+    font-size: 0.8em;
+}
+
+.logo_factura{
+    width: 180px;
+    height: 115px;
+    position: absolute;
+    top:20px;
+    left: 20px;
+}
+
+.datos_factura{
+    position: relative;
+    width: 100%;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: 35px;
+}
+
+.datos_factura .facturar_a{
+    width: 50%;
+}
+
+.datos_factura .num_fac{
+    width: 50%;  
+}
+
+.factura{
+    position: relative;
+    width: 100%;
+}
+
+.factura thead tr{
+    background:#008b35;
+    color:white;
+}
+
+.factura thead tr th{
+    text-align: center;
+}
+
+.factura tbody tr td{
+    text-align: center;
+}
+
+.factura tbody tr.total td:first-child{
+    text-align: right;
+    padding-right: 15px;
+}
+
+.factura tbody tr.total_final td:nth-child(5n), tr.total_final td:nth-child(6n){
+    background:#008b35;
+    color:white;
+}
+.info1{
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+.info2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.65em;
+}
+
+.sucursal{
+    text-align: center;
+}
+
+.derecha{
+    text-align: right!important;
+    padding-right: 5px;
+}
