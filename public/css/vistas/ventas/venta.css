@@ -1,0 +1,17 @@
+.contenedor_videos{
+    max-height: 450px;
+    overflow: auto;
+}
+
+.contenedor_buscador{
+    height: auto!important;
+}
+
+.total td{
+    font-weight: bold;
+    text-align: center;
+}
+
+.total td:nth-child(1){
+    text-align: right;
+}
