@@ -30,7 +30,7 @@
     </a>
 </li>
 <li class="{{request()->is('masVendidos*')? 'active':''}}">
-    <a href="{{route('productos.index')}}">
+    <a href="{{route('productos.masVendidos')}}">
     <i class="fa fa-chart-bar"></i> <span>Estadisticas</span>
     </a>
 </li>
