@@ -12,7 +12,7 @@ use sis_ventas\Venta;
 
 class DetalleTest extends TestCase
 {
-    /**test */
+    /** @test */
     public function detalleTest()
     {
          $comprueba = Venta::get()->last();
@@ -25,7 +25,7 @@ class DetalleTest extends TestCase
             }
     
             $venta = new Venta();
-            $venta->user_id = 1;
+            $venta->user_id = 2;
             $venta->cliente_id = 1;
     
             $b_cliente = Cliente::find(1);
@@ -35,9 +35,9 @@ class DetalleTest extends TestCase
             $venta->total = 12.5;
             $venta->total_final=12.5;
             $venta->nro_factura = $nro_fac;
-            $codigo_qr = 'QRTEST.png';//NOMBRE DE LA IMAGEN QR
+            $codigo_qr = 'QRTST.png';//NOMBRE DE LA IMAGEN QR
             // generando codigo QRinfo_qr
-            $info_qr = 'QRTEST|2020-05-31|48965126';
+            $info_qr = 'QRTST|2020-05-31|65432178';
             $base_64 = base64_encode(\QrCode::format('png')->size(400)->generate($info_qr));
             $imagen_codigo_qr = base64_decode($base_64);
             file_put_contents(public_path().'/imgs/ventas/qr/'.$codigo_qr, $imagen_codigo_qr);
