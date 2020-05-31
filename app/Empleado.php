@@ -16,4 +16,9 @@ class Empleado extends Model
     {
         return $this->belongsTo('sis_ventas\User','user_id','id');
     }
+
+    public function ventas()
+    {
+        return $this->hasMany('sis_ventas\Venta','empleado_id','id');
+    }
 }

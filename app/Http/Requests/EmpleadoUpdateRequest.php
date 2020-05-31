@@ -25,6 +25,7 @@ class EmpleadoUpdateRequest extends FormRequest
     {
         return [
             'ci' => 'unique:empleados,ci,'.$this->empleado->id,
+            'correo' => 'unique:empleados,correo,'.$this->empleado->id,
         ];
     }
 
@@ -32,6 +33,7 @@ class EmpleadoUpdateRequest extends FormRequest
     {
         return [
             'ci.unique' => 'Ese número de C.I. ya se encuentra registrado.',
+            'correo.unique' => 'Este correo ya se encuentra registrado.',
         ];
     }
 }

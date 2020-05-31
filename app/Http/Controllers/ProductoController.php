@@ -10,7 +10,7 @@ use sis_ventas\Promocion;
 
 class ProductoController extends Controller
 {
-      public function index(Request $request)
+    public function index(Request $request)
     {
         if($request->user()->tipo == 'ADMINISTRADOR' || $request->user()->tipo == 'EMPLEADO')
         {
@@ -46,6 +46,7 @@ class ProductoController extends Controller
         }
         abort(401, 'Acceso no autorizado');
     }
+
     public function update(Request $request, Producto $producto)
     {
         $comprueba = DetalleVenta::where('producto_id',$producto->id)->get();
@@ -81,6 +82,7 @@ class ProductoController extends Controller
             return redirect()->route('productos.index')->with('bien','Registro elimnado');
         }
     }
+
     public function ingreso(Request $request, Producto $producto)
     {
         $producto->ingresos = $request->cantidad + $producto->ingresos;
@@ -166,6 +168,7 @@ class ProductoController extends Controller
             'promocion_id' => $promocion_id
         ]);
     }
+
     public function masVendidos(Request $request)
     {
         if($request->user()->tipo == 'ADMINISTRADOR' || $request->user()->tipo == 'EMPLEADO')
@@ -208,6 +211,4 @@ class ProductoController extends Controller
             'datos'=>$datos,
         ]);
     }
-
-
 }
