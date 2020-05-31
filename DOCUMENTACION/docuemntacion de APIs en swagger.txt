@@ -1,0 +1,183 @@
+swagger: '2.0'
+info:
+  description: |
+    esta es la interfaz de programacion para sis_ventas en taller de sistemas
+    [https://github.com/DANITZA18/sis_ventas](https://github.com/DANITZA18/sis_ventas)
+  version: 1.0.0
+  title: sis_ventas(taller de sis)
+  contact:
+    email: danitzamarlenechurasocujayo@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+- name: security
+  description: Endpoint para login de usuario
+- name: user
+  description: Endpoint para mostrar lista de usuarios, adicion de usuarios, eliminacion ,etc
+  
+# schemes:
+# - http
+paths:
+  /security/login:
+    post:
+      tags:
+      - security
+      summary: verificar usuario y contraseña
+      operationId: security_login
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Objeto con usuario y contraseña a ser validados
+        required: true
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        200:
+          description: autenticado correctamente
+        403:
+          description: usuario no encontrado
+  /user/:
+    get:
+      tags:
+      - user
+      summary: busca los usuarios del sistema
+      description: retornar unicamente los usuarios que tengan algun status en particular
+      operationId: user_get_all
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserInfo'
+        404:
+          description: usuario no encontrado
+  /user/create:
+    post:
+      tags:
+      - user
+      summary: crea un nuevo usuario(empleado)
+      operationId: newUser
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Objeto con usuario y contraseña a ser validados
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/users/create'
+      responses:
+        200:
+          description: usuario registrado correctamente 
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/users/Response'
+        400:
+          description: Usuario invalido
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: http://petstore.swagger.io/oauth/dialog
+    flow: implicit
+    scopes:
+      write:pets: modify pets in your account
+      read:pets: read your pets
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Login:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+  UserSumary:
+    type: object
+    properties:
+      name:
+        type: string
+      direccion:
+        type: string  
+      userType:
+        type: string
+      CI:  
+        type: string
+      username:  
+        type: string
+      email:  
+        type: string
+      roles:  
+        type: string
+  UserInfo:
+    type: object
+    properties :
+      nombres:
+        type: string
+      apellidos:
+        type: string
+      celular:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      CI:
+        type: string
+        
+        
+  SystemAccess:
+    type: object
+    properties:
+      username: 
+        type: string
+      password: 
+        type: string 
+  NewUser:
+    type: object
+    properties:
+      userInfo:
+        type: object
+        $ref: '#/definitions/UserInfo'
+      systemAccess:
+        type: object
+        $ref: '#/definitions/SystemAccess'
+      roles:
+        type: array
+        items: 
+          type: object
+          $ref: '#/definitions/Role'
+  Role:
+    type: object
+    properties:
+      roleId:
+        type: integer
+      roleName:
+        type: string
+  Response:
+    type: object
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /DANITZA18/sis_ventas/1.0.0
+schemes:
+ - https
+ - http
