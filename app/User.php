@@ -44,4 +44,14 @@ class User extends Authenticatable
     {
         return $this->hasOne('sis_ventas\Empleado','user_id','id');
     }
+
+    public function ventas()
+    {
+        return $this->hasMany('sis_ventas\Venta','user_id','id');
+    }
+
+    public function solicitudes()
+    {
+        return $this->hasMany('sis_ventas\Solicitud','user_id','id');
+    }
 }

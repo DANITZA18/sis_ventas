@@ -15,17 +15,19 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('empleado_id')->unsigned();
-            $table->string('cliente');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('cliente_id')->unsigned();
             $table->string('nit');
             $table->date('fecha_venta');
-            $table->date('total');
-            $table->date('total_final');
-            $table->date('qr',255);
-            $table->date('codigo_control');
+            $table->bigInteger('nro_factura');
+            $table->decimal('total',24,2);
+            $table->decimal('total_final',24,2);
+            $table->string('qr',255);
+            $table->string('codigo_control');
             $table->timestamps();
 
-            $table->foreign('empleado_id')->references('id')->on('empleados')->ondelete('no action')->onupdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->ondelete('no action')->onupdate('cascade');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->ondelete('no action')->onupdate('cascade');
         });
     }
 

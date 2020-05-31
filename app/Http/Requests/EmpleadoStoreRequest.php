@@ -25,6 +25,7 @@ class EmpleadoStoreRequest extends FormRequest
     {
         return [
             'ci' => 'unique:empleados,ci',
+            'correo' => 'unique:empleados,correo',
         ];
     }
 
@@ -32,6 +33,7 @@ class EmpleadoStoreRequest extends FormRequest
     {
         return [
             'ci.unique' => 'Ese número de C.I. ya se encuentra registrado.',
+            'correo.unique' => 'Este correo ya se encuentra registrado.',
         ];
     }
 }

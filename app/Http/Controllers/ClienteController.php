@@ -18,6 +18,7 @@ class ClienteController extends Controller
         }
         abort(401, 'Acceso no autorizado');
     }
+
     public function create(Request $request)
     {
         if($request->user()->tipo == 'ADMINISTRADOR' || $request->user()->tipo == 'EMPLEADO')
@@ -43,6 +44,7 @@ class ClienteController extends Controller
         }
         abort(401, 'Acceso no autorizado');
     }
+
     public function update(ClienteUpdateRequest $request, Cliente $cliente)
     {
         $cliente->update(array_map('mb_strtoupper',$request->all()));
@@ -67,4 +69,4 @@ class ClienteController extends Controller
         $cliente->save();
         return redirect()->route('clientes.index')->with('bien','Cliente habilitado correctamente');
     }
-} 
+}
