@@ -172,6 +172,621 @@ definitions:
         type: integer
       message:
         type: string
+
+#PETICIONES GET
+  /productos:
+    get:
+      tags:
+      - productos
+      summary: buscar productos de la empresa
+      operationId: buscaProductos
+      description: |
+        Muestra los productos de la empresa segun alguna especificacion.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: producto_id
+        description: id del producto
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve los productos de la empresa con su respectiva informacion.
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/productos'   
+        400:
+          description: bad input parameter
+  /descuentos:
+    get:
+      tags:
+      - descuentos 
+      summary: buscar descuentos de la empresa
+      operationId: buscarDescuentos
+      description: |
+        Muestra los descuentos de las ventas de los productos.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: descuento_id
+        description: id del descuento
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve los descuentos de las ventas de los productos de la empresa con su respectiva informacion.
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/descuentos' 
+        400:
+          description: bad input parameter
+  /clientes:
+    get:
+      tags:
+      - clientes 
+      summary: buscar clientes 
+      operationId: buscarClientes
+      description: |
+        Muestra la lista de los clientes.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: cliente_id
+        description: id del cliente
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve la lista de clientes con su respectiva informacion y opciones a elegir.
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/clientes' 
+        400:
+          description: bad input parameter
+  /ventas:
+    get:
+      tags:
+      - ventas 
+      summary: buscar ventas 
+      operationId: buscarVentas
+      description: |
+        Muestra la lista de las ventas.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: venta_id
+        description: id de la venta
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve la lista de ventas con su respectiva informacion y opciones.
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/ventas' 
+        400:
+          description: bad input parameter
+          
+  /promociones:
+    get:
+      tags:
+      - promociones
+      summary: buscar promociones de los productos
+      operationId: buscaPromocion
+      description: |
+        Muestra la lista de promociones segun alguna especificacion.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: promocion_id
+        description: id de la promocion
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve la promocion requerida con su informacion respectiva .
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/promociones' 
+        400:
+          description: bad input parameter
+          
+  /estadisticas:
+    get:
+      tags:
+      - estadisticas 
+      summary: listar estadistica 
+      operationId: listarEstadistica
+      description: |
+        mostrar el informe de las estadistica de los productos vendidos hasta una determinada fecha.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: estadistica_id
+        description: id de la estadistica
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve la informacion de la estadistica con opciones de imprimir o descargar.
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/masVendidos' 
+        400:
+          description: fecha no valida
+
+  /contrasenas:
+    get:
+      tags:
+      - contraseñas 
+      summary: buscar el usuario y su contraseña 
+      operationId: listarContraseñas
+      description: |
+        mostrar la lista de las contraseñas con sus usuarios y estados.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: contraseña_id
+        description: id de la contraseña
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Devuelve la  contraseña buscada .
+          schema:
+            type: array
+            items:
+              $ref: 'http://localhost/sis_ventas/public/solicitudes' 
+        400:
+          description: no encontrada
+          
+#PETICIONES POST
+  /productosnuevos:
+    post:
+      tags:
+      - Registro
+      summary: realizar un registro de producto
+      operationId: realizarRegistroProducto
+      description: Realizar el registro de un producto nuevo en la empresa.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: productoRegistrar
+        description: Producto que se registrara 
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/productos/create'
+      responses:
+        201:
+          description: producto registrado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/productos'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  
+  
+  /descuentosnuevos:
+    post:
+      tags:
+      - RegistroDesc
+      summary: realizar un registro de descuento
+      operationId: realizarRegistroDescuento
+      description: Realizar el registro de un descuento nuevo para las ventas de la empresa.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: descuentoRegistrar
+        description: descuento que se registrara 
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/descuentos/create'
+      responses:
+        201:
+          description: descuento registrado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/descuentos'
+        400:
+          description: desceunto no registrado
+        409:
+          description: descuento ya existente
+  
+ 
+  /clientesnuevos:
+    post:
+      tags:
+      - RegistroCli
+      summary: realizar un registro de cliente
+      operationId: realizarRegistroCliente
+      description: Realizar el registro de un cliente nuevo de la empresa.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: clienteRegistrar
+        description: cliente a registrarse 
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/clientes/create'
+      responses:
+        201:
+          description: cliente registrado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/clientes'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: este cliente ya existe
+  
+  
+        
+  /ventasProd:
+    post:
+      tags:
+      - venta
+      summary: realizar el registro de una venta
+      operationId: realizarRegistroVenta
+      description: Realizar el  registro de una venta añadiendo los productos requeridos
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: objetoVenta
+        description: venta que se realizara
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/ventas/create'
+      responses:
+        201:
+          description: emision de factura
+        400:
+          description: datos incompletos, no emision de factura
+          
+  /promocionesnuevas:
+    post:
+      tags:
+      - RegistroProm
+      summary: realizar un registro de promocion 
+      operationId: realizarRegistroPromocion
+      description: Realizar el registro de una promocion nueva de un producto.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body  
+        name: promocionRegistrar
+        description: Promocion que se registrara 
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/promociones/create'
+      responses:
+        201:
+          description: promocion registrado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/promociones'
+        400:
+          description: promocion invalida no registrada
+        409:
+          description: esta promocion ya existe
+        
+#PETICIONES PUT
+  /productoModificar:
+    put:
+      tags:
+      - Modificar
+      summary: realizar la modificacion de un producto
+      operationId: realizarModificacionProducto
+      description: Realizar la modificacion de cualquier campo en cualquier producto de la empresa.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: productoModificar 
+        description: Producto que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/productos/edit/1'
+      responses:
+        201:
+          description: producto modificado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/productos'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+
+  /descuentoModificar:
+    put:
+      tags:
+      - ModificarDesc
+      summary: realizar la modificacion de algun descuento
+      operationId: realizarModificacionDescuento
+      description: Realizar la modificacion de cualquier descuento de venta en la empresa.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: descuentoModificar 
+        description: descuento que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/descuentos/edit/1'
+      responses:
+        201:
+          description: descuento modificado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/descuentos'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /clienteModificar:
+    put:
+      tags:
+      - ModificarCli
+      summary: realizar la modificacion de un cliente
+      operationId: realizarModificacionCliente
+      description: Realizar la modificacion de cualquier dato de un cliente.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: clienteModificar 
+        description: Cliente que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/clientes/edit/1'
+      responses:
+        201:
+          description: cliente modificado exitosamente 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/clientes'
+        400:
+          description: datos incorrectos, registro no modificado
+        409:
+          description: cliente existente
+  
+  /clienteEstado:
+    put:
+      tags:
+      - Activo/Inactivo
+      summary: realizar la habilitacion de un cliente
+      operationId: realizarHablitacionCliente
+      description: Realizar la habilitacion de cualquier cliente siempre y cuando vuelva a adquirir productos.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: clienteActivar 
+        description: Cliente que se habilitara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/cliente/estado'
+      responses:
+        201:
+          description: cliente activo 
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/clientes'
+        200:
+          description: cliente inactivo
+          schema: 
+            $ref: 'http://localhost/sis_ventas/public/clientes'
+            
+  /ventaModificar:
+    put:
+      tags:
+      - ModificarCli
+      summary: realizar la modificacion de una venta
+      operationId: realizarModificacionVenta
+      description: Realizar la modificacion de una venta editando la cantidad de productos o el nombre del cliente.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: ventaModificar 
+        description: venta que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/ventas/modificar'
+      responses:
+        201:
+          description: venta modificada
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/ventas'
+  /promocionModificar:
+    put:
+      tags:
+      - ModificarPro
+      summary: realizar la modificacion de una promocion
+      operationId: realizarModificacionPromocion
+      description: Realizar la modificacion de una promocion especificando al producto al cual pertenece .
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: promocionModificar 
+        description: promocion que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/promociones/edit/6'
+      responses:
+        201:
+          description: promocion modificado con exito
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/promociones' 
+
+  /contrasenaModificar:
+    put:
+      tags:
+      - ModificarCont
+      summary: realizar la modificacion de una contraseña
+      operationId: realizarModificacionContraseña
+      description: Realizar la modificacion de una contraseña de empleado segun la razon que es enviada al correo electronico del admnistrador.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: contraseñaModificar 
+        description: contraseña que se modificara 
+        required: true
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/solicitudes/edit/7'
+      responses:
+        201:
+          description: contraseña cambiada con exito y aviso al correo elctronico del empleado
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/solicitudes'        
+
+# PETICIONES DELETE
+
+  /productoEliminar:
+    delete:
+      tags:
+      - EliminarProd
+      summary: realizar la eliminacion de un producto
+      operationId: realizarEliminacionProducto
+      description: Realizar la eliminacion de cualquier producto de la empresa siempre y cuando este no este registrado en una venta.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: productoEliminar 
+        description: Producto que se eliminara
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/productos/eliminacion'
+      responses:
+        201:
+          description: registro eliminado  
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/productos'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: No se puede eliminar el registro porque esta siendo utilizado
+
+  /descuentoEliminar:
+    delete:
+      tags:
+      - EliminarDesc
+      summary: realizar la eliminacion de un descuento 
+      operationId: realizarEliminacionDescuento
+      description: Realizar la eliminacion de cualquier descuento de la empresa siempre y cuando este no este registrado en una venta.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: descuentoEliminar 
+        description: Descuento que se eliminara
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/descuentos/eliminacion'
+      responses:
+        201:
+          description: descuento eliminado  
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/descuentos'
+        400:
+          description: invalid input, object invalid
+        409:
+          description: No se puede eliminar el descuento porque esta siendo utilizado en una venta
+  
+  /promocionEliminar:
+    delete:
+      tags:
+      - EliminarProm
+      summary: realizar la eliminacion de una promocion
+      operationId: realizarEliminacionPromocion
+      description: Realizar la eliminacion de cualquier promocion siempre y cuando no se este utilizando.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: promocionEliminar 
+        description: Promocion que se eliminara
+        schema:
+          $ref: 'http://localhost/sis_ventas/public/promociones/eliminacion'
+      responses:
+        201:
+          description: promocion eliminada  
+          schema:
+            $ref: 'http://localhost/sis_ventas/public/promociones'
+        409:
+          description: No se puede eliminar el registro porque esta siendo utilizado
+          
+#MODELOS
+definitions:
+  buscaProductos:
+    required:
+    - id
+    - nombre
+    - costo
+    - disponible 
+    - ingresos
+    - salidas
+    - descripcion
+    properties:
+      id:
+        type: integer
+        example: 1
+      nombre:
+        type: string
+        example: Producto 1
+      costo:
+        type: number
+        format: double
+        example:  10
+      disponible:
+        type: number
+        example: 14
+      ingresos:
+        type: number
+        example: 21
+      salidas:
+        type: number
+        example: 7
+      descripcion:
+        type: string
+        example: botellas de 5 litros
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
