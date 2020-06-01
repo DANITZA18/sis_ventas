@@ -787,6 +787,48 @@ definitions:
       descripcion:
         type: string
         example: botellas de 5 litros
+    buscarDescuentos:
+    required:
+    - descuento_id
+    - nombre
+    - descuento %
+    - descripcion
+    properties:
+      descuento_id:
+        type: integer
+        example: 1
+      nombre:
+        type: string
+        example: descuento menor
+      descuento %:
+        type: number
+        example: 5
+      descripcion:
+        type: string
+        example: descuento del 5% total del total de productos adquiridos.
+  buscarClientes:
+    required:
+    - cliente_id
+    - nombre
+    - carnet de identidad
+    - celular
+    - estado
+    properties:
+      cliente_id:
+        type: integer
+        example: 1
+      nombre:
+        type: string
+        example: juan alvares
+      carnet de identidad:
+        type: string
+        example: 4896534 LP
+      celular:
+        type: number
+        example: 77773664
+      estado:
+        type: string
+        example: activo 
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
