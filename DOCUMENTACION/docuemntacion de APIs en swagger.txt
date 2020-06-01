@@ -829,6 +829,64 @@ definitions:
       estado:
         type: string
         example: activo 
+    buscarVentas:
+    required:
+    - venta_id
+    - empleado
+    - cliente
+    - fecha
+    - total Bs
+    properties:
+      venta_id:
+        type: integer
+        example: 1
+      empleado:
+        type: string
+        example:  admin
+      cliente:
+        type: string
+        example: Juan Alvares
+      fecha:
+        type: string
+        format: date
+        example: "2020-11-05"
+      total Bs:
+        type: number
+        format: double
+        example: 12.50
+  buscarPromocion:
+    required:
+    - promocion_id
+    - nombre
+    - producto
+    - cantidad
+    - descuento %
+    - fecha inicio
+    - fecha finalizacion
+    properties:
+      promocion_id:
+        type: integer
+        example: 1
+      nombre:
+        type: string
+        example:  promocion 1
+      producto:
+        type: string
+        example: producto 1
+      cantidad:
+        type: string
+        example: 4 a 5 unidades
+      descuento %:
+        type: number
+        example: 5
+      fecha inicio:
+        type: string
+        format: date
+        example: "2020-06-01"
+      fecha finalizacion:
+        type: string
+        format: date
+        example: "2020-11-05"
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
