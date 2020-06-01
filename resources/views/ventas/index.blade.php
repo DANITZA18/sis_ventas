@@ -58,7 +58,7 @@ Ventas
                                 <td>{{$cont++}}</td>
                                 <td>
                                     @if($venta->user->empleado)
-                                    {{$venta->empleado->nombre}} {{$venta->empleado->paterno}} {{$venta->empleado->materno}}
+                                    {{$venta->user->empleado->nombre}} {{$venta->user->empleado->paterno}} {{$venta->user->empleado->materno}}
                                     @else
                                     {{$venta->user->name}}
                                     @endif
@@ -109,6 +109,7 @@ Ventas
         language: lenguaje,
         pageLength:"25"
     });
+ 
     // ELIMINAR
     $(document).on('click','table.data-table tbody tr td.btns-opciones a.eliminar',function(e){
         e.preventDefault();
@@ -121,6 +122,6 @@ Ventas
     $('#btnEliminar').click(function(){
         $('#formEliminar').submit();
     });
-
+ 
 </script>
 @endsection
