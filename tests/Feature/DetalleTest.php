@@ -75,24 +75,24 @@ class DetalleTest extends TestCase
             $descuentos = [1];
             $cantidades = [1];
             $totales = [12.5];
-            // for($i = 0; $i < count($productos); $i++)
-            // {   
-            //     $detalle = new DetalleVenta();
-            //     $detalle->venta_id = $venta->id;
-            //     $detalle->producto_id = $productos[$i];
-            //     $detalle->cantidad = $cantidades[$i];
-            //     $detalle->costo = $precios[$i];
-            //     $detalle->descuento_id = $descuentos[$i];
-            //     $detalle->total = $totales[$i];
-            //     $detalle->save();
+            for($i = 0; $i < count($productos); $i++)
+            {   
+                $detalle = new DetalleVenta();
+                $detalle->venta_id = $venta->id;
+                $detalle->producto_id = $productos[$i];
+                $detalle->cantidad = $cantidades[$i];
+                $detalle->costo = $precios[$i];
+                $detalle->descuento_id = $descuentos[$i];
+                $detalle->total = $totales[$i];
+                $detalle->save();
     
-            //     $producto = Producto::find($productos[$i]);
-            //     // actualizar el stock del producto
-            //     $producto->disponible = $producto->disponible - $cantidades[$i];
-            //     // actualizar salidas
-            //     $producto->salidas = $producto->salidas + $cantidades[$i];
-            //     $producto->save();
-            // }
+                $producto = Producto::find($productos[$i]);
+                // actualizar el stock del producto
+                $producto->disponible = $producto->disponible - $cantidades[$i];
+                // actualizar salidas
+                $producto->salidas = $producto->salidas + $cantidades[$i];
+                $producto->save();
+            }
 
         $msj = false;
         if($venta)
