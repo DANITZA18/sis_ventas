@@ -39,7 +39,7 @@ class ClienteTest extends TestCase
 
         $this->get(route('clientes.index'))
                 ->assertStatus(200)
-                ->assertSee('JUAN PERES')
+                ->assertSee('JUAN PERES X')
                 ->assertSee('45678912 LP')
                 ->assertSee('78945612')
                 ->assertSee('ACTIVO');

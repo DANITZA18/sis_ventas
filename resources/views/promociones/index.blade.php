@@ -65,7 +65,7 @@ Promociones
                                     {{$promocion->producto->nom}}
                                 </td>
                                 <td>
-                                    {{$promocion->inicio}} {{($promocion->fin != null)? 'a '.$promocion->inicio:'o mas' }} unidades
+                                    {{$promocion->inicio}} {{($promocion->fin != null)? 'a '.$promocion->fin:'o mas' }} unidades
                                 </td>
                                 <td class="centreado">
                                     {{$promocion->descuento->descuento}}
